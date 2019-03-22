@@ -700,3 +700,8 @@ CREATE TABLE [dbo].[licencia_solic](
 ) ON [PRIMARY]
 GO
 
+--#CKFK 20190321 0623 PM Modifiqué la tabla P_HANDHELD para poder llevar el control del Correlativo del cierre Z y del GrandTotal
+
+ALTER TABLE P_HANDHELD 
+ADD CORELZ INT NOT NULL DEFAULT(0),
+GRANDTOTAL FLOAT NOT NULL DEFAULT(0)
