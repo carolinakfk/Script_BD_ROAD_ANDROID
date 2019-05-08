@@ -812,3 +812,4 @@ SET TEXTO= REPLACE(texto,'SS','@Serie')
 UPDATE P_ENCABEZADO_REPORTESHH_II
 SET TEXTO= REPLACE(texto,'##','@Numero')
 
+INSERT INTO P_PARAMEXT VALUES(18,'','Restringir venta por GPS margen','S')
