@@ -29,31 +29,30 @@ GO
 CREATE FUNCTION [dbo].[AndrDateFin]
 (@ddate AS datetime)
 
-returns int
+returns bigint
 
 as
 
 begin
 
-DECLARE @rv int
-DECLARE @vy int
-DECLARE @vm int
-DECLARE @vd int
-DECLARE @vh int
-DECLARE @vmi int
+DECLARE @rv bigint
+DECLARE @vy bigint
+DECLARE @vm bigint
+DECLARE @vd bigint
+DECLARE @vh bigint
+DECLARE @vmi bigint
 
-SET @vy = CAST(YEAR(@ddate) AS int) -2000
-SET @vm = CAST(MONTH(@ddate) AS int) 
-SET @vd = CAST(DAY(@ddate) AS int) 
-SET @vh =  CAST(DATEPART(hour, @ddate) AS int) 
-SET @vmi = CAST(DATEPART(minute, @ddate) AS int) 
-
+SET @vy = CAST(YEAR(@ddate) AS bigint)
+SET @vm = CAST(MONTH(@ddate) AS bigint)
+SET @vd = CAST(DAY(@ddate) AS bigint)
+SET @vh =  CAST(DATEPART(hour, @ddate) AS bigint)
+SET @vmi = CAST(DATEPART(minute, @ddate) AS bigint)
 SET @rv= @vy*10000+@vm*100+@vd
-SET @rv= @rv*10000+2400
+SET @rv= @rv*1000000+235900
 
 RETURN @rv
 
-end
+END
 GO
 
 /****** Object:  UserDefinedFunction [dbo].[AndrDateIni]    Script Date: 19/03/2019 09:31:19 a.m. ******/
@@ -67,27 +66,27 @@ GO
 CREATE FUNCTION [dbo].[AndrDateIni]
 (@ddate AS datetime)
 
-returns int
+returns bigint
 
 as
 
 begin
 
-DECLARE @rv int
-DECLARE @vy int
-DECLARE @vm int
-DECLARE @vd int
-DECLARE @vh int
-DECLARE @vmi int
+DECLARE @rv bigint
+DECLARE @vy bigint
+DECLARE @vm bigint
+DECLARE @vd bigint
+DECLARE @vh bigint
+DECLARE @vmi bigint
+DECLARE @vse bigint
 
-SET @vy = CAST(YEAR(@ddate) AS int) -2000
-SET @vm = CAST(MONTH(@ddate) AS int) 
-SET @vd = CAST(DAY(@ddate) AS int) 
-SET @vh =  CAST(DATEPART(hour, @ddate) AS int) 
-SET @vmi = CAST(DATEPART(minute, @ddate) AS int) 
-
+SET @vy = CAST(YEAR(@ddate) AS bigint)
+SET @vm = CAST(MONTH(@ddate) AS bigint)
+SET @vd = CAST(DAY(@ddate) AS bigint)
+SET @vh =  CAST(DATEPART(hour, @ddate) AS bigint)
+SET @vmi = CAST(DATEPART(minute, @ddate) AS bigint)
 SET @rv= @vy*10000+@vm*100+@vd
-SET @rv= @rv*10000+0
+SET @rv= @rv*1000000
 
 RETURN @rv
 
