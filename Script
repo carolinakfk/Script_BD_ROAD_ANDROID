@@ -115,22 +115,22 @@ CREATE TABLE [dbo].[P_PARAMEXT](
 GO
 
 DELETE FROM P_PARAMEXT;
-INSERT INTO P_PARAMEXT (ID,idRuta,Nombre,Valor) VALUES(1,'GPS Margen ( Metros )','50')
-INSERT INTO P_PARAMEXT (ID,idRuta,Nombre,Valor) VALUES(2,'Stock Interfaz','S')
-INSERT INTO P_PARAMEXT (ID,idRuta,Nombre,Valor) VALUES(3,'Modalidad','TOL')
-INSERT INTO P_PARAMEXT (ID,idRuta,Nombre,Valor) VALUES(4,'Solicitud de inventario','')
-INSERT INTO P_PARAMEXT (ID,idRuta,Nombre,Valor) VALUES(5,'Pantalla aceptar carga','N')
-INSERT INTO P_PARAMEXT (ID,idRuta,Nombre,Valor) VALUES(6,'Boton Inventario ( Comunicacion )','S')
-INSERT INTO P_PARAMEXT (ID,idRuta,Nombre,Valor) VALUES(7,'Boton Precios ( Comunicacion )','S')
-INSERT INTO P_PARAMEXT (ID,idRuta,Nombre,Valor) VALUES(8,'Boton Recarga ( Comunicacion )','S')
-INSERT INTO P_PARAMEXT (ID,idRuta,Nombre,Valor) VALUES(9,'Cantidad de decimales en calculos','3')
-INSERT INTO P_PARAMEXT (ID,idRuta,Nombre,Valor) VALUES(10,'Cantidad de decimales impresion','3')
-INSERT INTO P_PARAMEXT (ID,idRuta,Nombre,Valor) VALUES(11,'Cantidad de decimales para cantidad','6')
-INSERT INTO P_PARAMEXT (ID,idRuta,Nombre,Valor) VALUES(12,'Simbolo de moneda','$')
-INSERT INTO P_PARAMEXT (ID,idRuta,Nombre,Valor) VALUES(13,'Seleccionar ayudante y vehículo','S')
-INSERT INTO P_PARAMEXT (ID,idRuta,Nombre,Valor) VALUES(14,'Envio parcial','S')
-INSERT INTO P_PARAMEXT (ID,idRuta,Nombre,Valor) VALUES(15,'Ordenar producto por nombre','S')
-INSERT INTO P_PARAMEXT (ID,idRuta,Nombre,Valor) VALUES(16,'Formato factura','TOL')
+INSERT INTO P_PARAMEXT (ID,idRuta,Nombre,Valor) VALUES(1,'','GPS Margen ( Metros )','50')
+INSERT INTO P_PARAMEXT (ID,idRuta,Nombre,Valor) VALUES(2,'','Stock Interfaz','S')
+INSERT INTO P_PARAMEXT (ID,idRuta,Nombre,Valor) VALUES(3,'','Modalidad','TOL')
+INSERT INTO P_PARAMEXT (ID,idRuta,Nombre,Valor) VALUES(4,'','Solicitud de inventario','')
+INSERT INTO P_PARAMEXT (ID,idRuta,Nombre,Valor) VALUES(5,'','Pantalla aceptar carga','N')
+INSERT INTO P_PARAMEXT (ID,idRuta,Nombre,Valor) VALUES(6,'','Boton Inventario ( Comunicacion )','S')
+INSERT INTO P_PARAMEXT (ID,idRuta,Nombre,Valor) VALUES(7,'','Boton Precios ( Comunicacion )','S')
+INSERT INTO P_PARAMEXT (ID,idRuta,Nombre,Valor) VALUES(8,'','Boton Recarga ( Comunicacion )','S')
+INSERT INTO P_PARAMEXT (ID,idRuta,Nombre,Valor) VALUES(9,'','Cantidad de decimales en calculos','3')
+INSERT INTO P_PARAMEXT (ID,idRuta,Nombre,Valor) VALUES(10,'','Cantidad de decimales impresion','3')
+INSERT INTO P_PARAMEXT (ID,idRuta,Nombre,Valor) VALUES(11,'','Cantidad de decimales para cantidad','6')
+INSERT INTO P_PARAMEXT (ID,idRuta,Nombre,Valor) VALUES(12,'','Simbolo de moneda','$')
+INSERT INTO P_PARAMEXT (ID,idRuta,Nombre,Valor) VALUES(13,'','Seleccionar ayudante y vehículo','S')
+INSERT INTO P_PARAMEXT (ID,idRuta,Nombre,Valor) VALUES(14,'','Envio parcial','S')
+INSERT INTO P_PARAMEXT (ID,idRuta,Nombre,Valor) VALUES(15,'','Ordenar producto por nombre','S')
+INSERT INTO P_PARAMEXT (ID,idRuta,Nombre,Valor) VALUES(16,'','Formato factura','TOL')
 
 
 /******     D_ATENCION      ******/
