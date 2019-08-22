@@ -1025,6 +1025,14 @@ CREATE TABLE [dbo].[P_BITACORA_VERSIONPC](
 
 GO
 
+/****** Object:  Index [NCL_IX_P_PORCMERMA]    Script Date: 2019/08/22 08:22:00 a.m. ******/
+CREATE NONCLUSTERED INDEX [NCL_IX_P_PORCMERMA] ON [dbo].[P_PORCMERMA]
+(
+	[PRODUCTO] ASC,
+	[RUTA] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+
 /****** Object:  Index [IX_tmp_liquidacion]    Script Date: 2019/08/19 07:54:24 a.m. ******/
 CREATE NONCLUSTERED INDEX [IX_tmp_liquidacion] ON [dbo].[tmp_liquidacion]
 (
@@ -1032,7 +1040,7 @@ CREATE NONCLUSTERED INDEX [IX_tmp_liquidacion] ON [dbo].[tmp_liquidacion]
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 GO
 
-/****** Object:  Index [PK_P_STOCKB_1]    Script Date: 2019/08/19 11:40:34 a.m. ******/
+/****** Object:  Index [pk_tmp_liquidacion]    Script Date: 2019/08/19 11:40:34 a.m. ******/
 ALTER TABLE [dbo].[tmp_liquidacion] ADD  CONSTRAINT [pk_tmp_liquidacion] PRIMARY KEY CLUSTERED 
 (
 	[RUTA] ASC,
@@ -1040,9 +1048,7 @@ ALTER TABLE [dbo].[tmp_liquidacion] ADD  CONSTRAINT [pk_tmp_liquidacion] PRIMARY
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 GO
 
-/****** Object:  Index [PK_P_STOCKB_1]    Script Date: 2019/08/19 11:40:34 a.m. 
-
-******/
+/****** Object:  Index [pk_tmp_liquidacion]    Script Date: 2019/08/19 11:40:34 a.m. ******/
 ALTER TABLE [dbo].[tmp_liquidacion] ADD  CONSTRAINT [pk_tmp_liquidacion] PRIMARY 
 KEY CLUSTERED 
 (
@@ -1102,3 +1108,73 @@ INCLUDE ([COREL],[FECHA])
 CREATE NONCLUSTERED INDEX NONCL_SEL_P_NOTACD_20190819_1515_EJC
 ON [dbo].[P_NOTACD] ([CORELFACTURA],[RUTA])
 
+/****** Object:  Index [NCL_IX_P_LIQ_ENVIANDO_20190820]    Script Date: 2019/08/20 08:50:06 a.m. ******/
+CREATE NONCLUSTERED INDEX [NCL_IX_P_LIQ_ENVIANDO_20190820] ON [dbo].[P_LIQ_ENVIANDO]
+(
+	[USUARIO] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+
+CREATE NONCLUSTERED INDEX NONCL_P_DIFLIQ_DET_20190820_0947_EJC 
+ON [dbo].[P_DIFLIQ_DET] ([CODIGOLIQUIDACION])
+INCLUDE ([CODIGO],[PRODUCTO],[CANTIDAD],[PESO],[UMSTOCK])
+
+CREATE NONCLUSTERED INDEX NONCL_P_STOCKB_20190820_0953_EJC 
+ON [dbo].[P_STOCKB] ([RUTA],[ANULADO],[STATUS],[CODIGOLIQUIDACION],[FECHA])
+INCLUDE ([DOCUMENTO])
+
+/******* Modificación para utilizar el campo VEHICULO 
+         para guardar la forma de pago de la factura '1' Crédito, '0' Contado *******/	 
+BEGIN TRANSACTION
+	update d_Factura set vehiculo = '0'
+	update d_factura set vehiculo = isnull( (select 1 from d_facturap where codpago = 4 and corel = d_factura.corel),0)
+COMMIT TRANSACTION
+
+/****** Object:  Trigger [dbo].[trgUpdFlagPagoI]    Script Date: 2019/08/20 04:20:10 p.m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TRIGGER [dbo].[trgUpdFlagPagoI]
+   ON  [dbo].[D_FACTURAP]
+   AFTER INSERT
+AS 
+BEGIN
+	
+	SET NOCOUNT ON;
+
+    -- Insert statements for trigger here
+    DECLARE @COREL NVARCHAR(20)
+	DECLARE @TIPO NVARCHAR(1)
+    
+    SELECT @COREL = COREL, @TIPO=TIPO FROM INSERTED
+    
+    UPDATE D_FACTURA SET VEHICULO =  CASE WHEN @TIPO = 'K' THEN '1' ELSE '0' END  WHERE COREL = @COREL 
+END
+
+
+/****** Object:  Trigger [dbo].[trgUpdateFlagF]    Script Date: 2019/08/20 03:41:46 p.m. ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TRIGGER [dbo].[trgUpdFlagPagoU]
+   ON  [dbo].[D_FACTURAP]
+   AFTER UPDATE
+AS 
+BEGIN
+	
+	SET NOCOUNT ON;
+
+    -- Insert statements for trigger here
+    DECLARE @COREL NVARCHAR(20)
+	DECLARE @TIPO NVARCHAR(1)
+    
+    SELECT @COREL = COREL, @TIPO=TIPO FROM INSERTED
+    
+    UPDATE D_FACTURA SET VEHICULO =  CASE WHEN @TIPO = 'K' THEN '1' ELSE '0' END  WHERE COREL = @COREL 
+END
+
+GO	 
