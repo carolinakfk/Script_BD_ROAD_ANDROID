@@ -1,0 +1,22 @@
+VPN
+usuario: dtsroad
+clave:   dts.2016
+
+Servidor ROAD
+IP: 172.16.10.9
+usuario: cfuentes
+clave: cf483075n3
+
+Base de datos Producción
+
+Servidor SQL Server: 172.16.10.9
+usuario: sa
+clave:   toledano.2009
+
+
+Base de datos QA
+
+Servidor SQL Server: 172.16.10.84
+usuario: sa
+clave:   admin.1234
+
