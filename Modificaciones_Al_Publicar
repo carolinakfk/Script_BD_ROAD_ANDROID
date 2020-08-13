@@ -24,5 +24,9 @@ Modificaciones a realizar antes de publicar:
 	Etiqueta de Version
    		240 - Versión QA
    		PRD - Versión PRD
-		
+4- En el Conn.ini
+      Quitar la instancia PRODUCCION
+      Revisar que vaya USUARIO = 
+                       CLAVE = 
+		       SEGURIDAD_INTEGRADA = SI
     
